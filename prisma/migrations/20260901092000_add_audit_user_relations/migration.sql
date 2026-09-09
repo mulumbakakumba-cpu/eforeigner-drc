@@ -1,0 +1,5 @@
+ALTER TABLE "JourneyAuditLog"
+ADD CONSTRAINT "JourneyAuditLog_officerId_fkey" FOREIGN KEY ("officerId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+ALTER TABLE "DocumentAccessLog"
+ADD CONSTRAINT "DocumentAccessLog_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

@@ -1,0 +1,145 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                 String              @id @default(cuid())
+  fullName           String
+  email              String              @unique
+  password           String
+  role               String              @default("citizen")
+  applications       Application[]
+  documentAccessLogs DocumentAccessLog[]
+  auditLogs          JourneyAuditLog[]
+}
+
+model Application {
+  id                 String              @id @default(cuid())
+  applicationId      String              @unique
+  fullName           String
+  email              String
+  nationality        String
+  passportNumber     String
+  purpose            String
+  status             String              @default("Submitted")
+  createdAt          DateTime            @default(now())
+  userId             String?
+  passportFile       String?
+  photoFile          String?
+  supportFile        String?
+  applicationType    String              @default("RESIDENCE")
+  idempotencyKey     String?             @unique
+  birthDate          DateTime?
+  arrivalDate        DateTime?
+  user               User?               @relation(fields: [userId], references: [id])
+  documentAccessLogs DocumentAccessLog[]
+  auditLogs          JourneyAuditLog[]
+  residenceJourney   ResidenceJourney?
+}
+
+model ResidenceJourney {
+  id            String               @id @default(cuid())
+  applicationId String               @unique
+  percentage    Int                  @default(20)
+  currentStep   String               @default("ACCOUNT_CREATED")
+  status        String               @default("IN_PROGRESS")
+  startedAt     DateTime             @default(now())
+  completedAt   DateTime?
+  immigration   ImmigrationReview?
+  auditLogs     JourneyAuditLog[]
+  steps         JourneyStep[]
+  medical       MedicalVerification?
+  payments      Payment[]
+  application   Application          @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+}
+
+model JourneyStep {
+  id          String           @id @default(cuid())
+  journeyId   String
+  step        String
+  percentage  Int
+  status      String           @default("PENDING")
+  startedAt   DateTime?
+  completedAt DateTime?
+  verifiedBy  String?
+  notes       String?
+  journey     ResidenceJourney @relation(fields: [journeyId], references: [id], onDelete: Cascade)
+
+  @@unique([journeyId, step])
+}
+
+model MedicalVerification {
+  id         String           @id @default(cuid())
+  journeyId  String           @unique
+  status     String           @default("PENDING")
+  hospital   String?
+  verifiedAt DateTime?
+  verifiedBy String?
+  notes      String?
+  journey    ResidenceJourney @relation(fields: [journeyId], references: [id], onDelete: Cascade)
+}
+
+model Payment {
+  id         String           @id @default(cuid())
+  journeyId  String
+  type       String
+  amount     Float
+  currency   String           @default("USD")
+  status     String           @default("PENDING")
+  reference  String?
+  paidAt     DateTime?
+  verifiedAt DateTime?
+  verifiedBy String?
+  createdAt  DateTime         @default(now())
+  journey    ResidenceJourney @relation(fields: [journeyId], references: [id], onDelete: Cascade)
+
+  @@index([journeyId, status])
+}
+
+model ImmigrationReview {
+  id         String           @id @default(cuid())
+  journeyId  String           @unique
+  status     String           @default("PENDING")
+  reviewedAt DateTime?
+  reviewedBy String?
+  decision   String?
+  notes      String?
+  journey    ResidenceJourney @relation(fields: [journeyId], references: [id], onDelete: Cascade)
+}
+
+model JourneyAuditLog {
+  id             String           @id @default(cuid())
+  applicationId  String
+  journeyId      String
+  officerId      String
+  action         String
+  fromStep       String?
+  toStep         String?
+  fromPercentage Int?
+  toPercentage   Int?
+  notes          String?
+  createdAt      DateTime         @default(now())
+  application    Application      @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  journey        ResidenceJourney @relation(fields: [journeyId], references: [id], onDelete: Cascade)
+  officer        User             @relation(fields: [officerId], references: [id])
+
+  @@index([applicationId, createdAt])
+}
+
+model DocumentAccessLog {
+  id            String      @id @default(cuid())
+  applicationId String
+  userId        String
+  documentType  String
+  action        String
+  createdAt     DateTime    @default(now())
+  application   Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  user          User        @relation(fields: [userId], references: [id])
+
+  @@index([applicationId, createdAt])
+}
