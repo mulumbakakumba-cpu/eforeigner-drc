@@ -1,159 +1,68 @@
-# Turborepo starter
+# 🇨🇩 eForeigner DRC
 
-This Turborepo starter is maintained by the Turborepo core team.
+## Digital Immigration Management Platform for the Democratic Republic of Congo
 
-## Using this example
+eForeigner DRC is a full-stack web application designed to simplify and organize immigration-related procedures for foreigners living in or travelling to the Democratic Republic of Congo.
 
-Run the following command:
+I built this project to explore how a digital platform could bring together application submission, document management, application tracking, officer review, payment verification, and administrative workflows in one system.
 
-```sh
-npx create-turbo@latest
-```
+The goal was not simply to create a website, but to build a structured application with different user roles, a database-backed workflow, authentication, authorization, audit history, and a clear progression from application submission to immigration decision.
 
-## What's inside?
+> **Note:** This is an independent software project and is not an official government platform of the Democratic Republic of Congo.
 
-This Turborepo includes the following packages/apps:
+---
 
-### Apps and Packages
+## 🎯 Why I Built This Project
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+Immigration procedures often involve several steps, documents, validations and interactions between applicants and administrative services.
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+I wanted to explore how these processes could be represented digitally.
 
-### Utilities
+The project started as an idea for an immigration portal and progressively evolved into a complete full-stack application with:
 
-This Turborepo has some additional tools already setup for you:
+- Applicant accounts
+- Immigration applications
+- Document submission
+- Application tracking
+- Officer validation
+- Medical verification
+- Payment verification
+- Immigration decisions
+- Administrative management
+- Audit history
+- French / English interface
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+The project also gave me the opportunity to work on authentication, database relationships, API design, role-based access control and application workflow management.
 
-### Build
+---
 
-To build all apps and packages, run the following command:
+## 👤 Applicant Features
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
+Applicants can create an account and access their personal immigration space.
 
-```sh
-cd my-turborepo
-turbo build
-```
+### Application management
 
-Without global `turbo`, use your package manager:
+Applicants can:
 
-```sh
-cd my-turborepo
-npx turbo build
-pnpm dlx turbo build
-pnpm exec turbo build
-```
+- Create an immigration application
+- Enter personal and passport information
+- Select the purpose of their application
+- Upload supporting documents
+- View their submitted applications
+- Follow the progress of an application
+- Access their application details
 
-You can build a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
+### Application tracking
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
+Each residence application follows a structured progression:
 
-```sh
-turbo build --filter=docs
-```
-
-Without global `turbo`:
-
-```sh
-npx turbo build --filter=docs
-pnpm exec turbo build --filter=docs
-pnpm exec turbo build --filter=docs
-```
-
-### Develop
-
-To develop all apps and packages, run the following command:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
-
-```sh
-cd my-turborepo
-turbo dev
-```
-
-Without global `turbo`, use your package manager:
-
-```sh
-cd my-turborepo
-npx turbo dev
-pnpm exec turbo dev
-pnpm exec turbo dev
-```
-
-You can develop a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
-
-```sh
-turbo dev --filter=web
-```
-
-Without global `turbo`:
-
-```sh
-npx turbo dev --filter=web
-pnpm exec turbo dev --filter=web
-pnpm exec turbo dev --filter=web
-```
-
-### Remote Caching
-
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
-
-Turborepo can use a technique known as [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
-
-```sh
-cd my-turborepo
-turbo login
-```
-
-Without global `turbo`, use your package manager:
-
-```sh
-cd my-turborepo
-npx turbo login
-pnpm exec turbo login
-pnpm exec turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
-
-```sh
-turbo link
-```
-
-Without global `turbo`:
-
-```sh
-npx turbo link
-pnpm exec turbo link
-pnpm exec turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turborepo.dev/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.dev/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.dev/docs/reference/configuration)
-- [CLI Usage](https://turborepo.dev/docs/reference/command-line-reference)
+```text
+20%  Account Created
+      ↓
+40%  Documents & Profile Validated
+      ↓
+60%  Medical Verification
+      ↓
+80%  Payment Verification
+      ↓
+100% Immigration Decision
