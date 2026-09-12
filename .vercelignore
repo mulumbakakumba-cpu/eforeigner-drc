@@ -1,0 +1,10 @@
+node_modules
+.next
+.turbo
+.git
+.vercel
+*.zip
+*.log
+apps/web/public/uploads
+apps/web/private/uploads
+apps/docs/.next

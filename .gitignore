@@ -41,3 +41,5 @@ node_modules/.cache/
 # User uploaded documents - NEVER commit
 apps/web/private/uploads/
 apps/web/public/uploads/
+.vercel
+.env*
