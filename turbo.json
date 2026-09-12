@@ -9,6 +9,8 @@
       "env": [
         "AUTH_SECRET",
         "DATABASE_URL",
+        "PRISMA_DATABASE_URL",
+        "POSTGRES_URL",
         "NEXTAUTH_URL",
         "PAYMENT_PROVIDER"
       ]
